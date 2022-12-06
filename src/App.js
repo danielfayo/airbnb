@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import React from 'react';
+import  Navbar  from './components/Navbar';
+import Hero from './components/Hero';
+import Card from './components/Card';
+import StarImage from './assets/Star.svg'
+import bikeImg from './assets/bike.jpg'
+import data from './data';
 import './App.css';
 
+
 function App() {
+  const mod =  data.map(element => {
+    return <Card
+    image={bikeImg}
+    starImg={StarImage}
+    ratingValue={element.stats.rating} 
+    country={` (${element.stats.reviewCount}) • ${element.location}`} 
+    heading={element.title}
+    price= {element.price}
+    status={element.openSpots}
+    location={element.location}
+    />
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar/>
+      <Hero/>
+      <section className='cards'>
+        {mod}
+      </section>
     </div>
   );
 }
